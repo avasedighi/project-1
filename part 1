@@ -1,0 +1,22 @@
+class Lego:
+    def __init__(self, title: str, price: float, pieces: int,
+                 age_rate: str, item: int, stockCount: int):
+        self.title = title
+        self.price = price
+        self.pieces = pieces
+        self.age = age
+        self.item = item
+        self._stockCount = stockCount
+
+
+grand_piano_1 = Lego('Grand Piano', 399.99, 3662, 'A', 21323, 3)
+grand_piano_2 = Lego('Grand Piano', 249.99, 1780, 'B', 10562, 4)
+grand_piano_3 = Lego('Grand Piano', 99.99, 431, 'C', 1098, 9)
+
+eiffel_tower_1 = Lego('Eiffel Tower', 629.99, 10001, 'A', 1098, 10)
+eiffel_tower_2 = Lego('Eiffel Tower', 539.99, 8893, 'B', 850, 1)
+eiffel_tower_3 = Lego('Eiffel Tower', 349.99, 1087, 'C', 460, 4)
+
+car_1 = Lego('porsche 911', 290.99, 2308, 'A', 10295, 17)
+car_2 = Lego('porsche 911', 169.99, 1458, 'B', 4056, 29)
+car_3 = Lego('porsche 911', 89.99, 560, 'C', 1105, 27)
