@@ -24,11 +24,11 @@ class User:
 
 class Lego:
     def __init__(self, title: str, price: float, pieces: int,
-                 age_rate: str, item: int, stockCount: int):
+                 ageRate: str, item: int, stockCount: int):
         self.title = title
         self.price = price
         self.pieces = pieces
-        self.age = age
+        self.ageRate = ageRate
         self.item = item
         self._stockCount = stockCount
 
