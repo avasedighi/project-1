@@ -1,3 +1,27 @@
+class Date:
+    def __init__(self, year: int, month: int, day: int):
+        self.year = year
+        self.month = month
+        self.day = day
+
+
+class Time:
+    def __init__(self, hour: int, minute: int, second: int):
+        self.hour = hour
+        self.minute = minute
+        self.second = second
+
+
+class User:
+    def __init__(self, name: str, lastName: str, sex: str, birthDate: Date,
+                 phoneNumber: str, emailAddress: str):
+        self.name = name
+        self.lastName = lastName
+        self.sex = sex
+        self.birthDate = birthDate
+        self._phoneNumber = phoneNumber
+
+
 class Lego:
     def __init__(self, title: str, price: float, pieces: int,
                  age_rate: str, item: int, stockCount: int):
@@ -20,3 +44,7 @@ eiffel_tower_3 = Lego('Eiffel Tower', 349.99, 1087, 'C', 460, 4)
 car_1 = Lego('porsche 911', 290.99, 2308, 'A', 10295, 17)
 car_2 = Lego('porsche 911', 169.99, 1458, 'B', 4056, 29)
 car_3 = Lego('porsche 911', 89.99, 560, 'C', 1105, 27)
+
+house_1 = Lego('House', 89.99, 3101, 'A', 7089, 23)
+house_2 = Lego('House', 89.99, 1780, 'B', 4178, 30)
+house_3 = Lego('House', 44.99, 604, 'C', 1056, 16)
