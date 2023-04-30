@@ -14,9 +14,10 @@ class Time:
 
 class User:
     def __init__(self, name: str, lastName: str, sex: str, birthDate: Date,
-                 phoneNumber: str, emailAddress: str):
+                 phoneNumber: str, emailAddress: str, password: int):
         self.name = name
         self.lastName = lastName
+        self.password = password
         self.sex = sex
         self.birthDate = birthDate
         self._phoneNumber = phoneNumber
@@ -48,3 +49,4 @@ car_3 = Lego('porsche 911', 89.99, 560, 'C', 1105, 27)
 house_1 = Lego('House', 89.99, 3101, 'A', 7089, 23)
 house_2 = Lego('House', 89.99, 1780, 'B', 4178, 30)
 house_3 = Lego('House', 44.99, 604, 'C', 1056, 16)
+
