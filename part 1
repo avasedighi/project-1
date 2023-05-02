@@ -56,8 +56,11 @@ print('Welcome to our LEGO Shop!')
 Users = {'usernames': [],
          'passwords': []}
 
+Admins = {'usernames': [],
+          'passwords': []}
 
-def TrueLogin(username, password):
+
+def TrueUserLogin(username, password):
     TrueUsername = 0
     TruePassword = 0
     for i in Users['usernames']:
@@ -75,22 +78,46 @@ def TrueLogin(username, password):
 # اکانت وجود نداره
 
 
+def TrueAdminLogin(username, password):
+    TrueUsername = 0
+    TruePassword = 0
+    for i in Admins['usernames']:
+        if i == Admins:
+            TrueUsername = 1
+            if Admins['passwords'][i] == password:
+                TruePassword = 1
+                print('Welcome Sir. You are logged in!')
+            break
+    if TrueUsername == 1 and TruePassword == 0:
+        return 10
+# اکانت وجود داره ولی پسورد غلطه
+    if TrueUsername == 0 and TruePassword == 0:
+        return 11
+# اکانت وجود نداره
+
 def AorU():
     x = input('Are you an Admin or a User? Type "A" for admin and "U" for user.')
     if x == 'A':
-        print(x)
         username = input("Enter your user name:")
         password = input("Enter your password:")
+        TrueAdminLogin(username, password)
+        if TrueAdminLogin(username, password) == 10:
+            print("Wrong Password! Try again or creat a new account.")
+            return 10
+        if TrueAdminLogin(username, password) == 11:
+            print("We can't find your account. Try for another account (user one maybe!) or make one.")
+            return 11
 
     elif x == 'U':
         username = input("Enter your user name:")
         password = input("Enter your password:")
-        TrueLogin(username, password)
-        if TrueLogin(username, password) == 10:
+        TrueUserLogin(username, password)
+        if TrueUserLogin(username, password) == 10:
+            print("Wrong Password! Try again or creat a new account.")
             return 10
-        if TrueLogin(username, password) == 11:
+        if TrueUserLogin(username, password) == 11:
+            print("We can't find your account. Try for another account or make one.")
             return 11
-
     else:
         print('Enter a valid answer please.(A or U)')
         AorU()
@@ -100,11 +127,12 @@ def login():
     x = input("Do you have an account?")
     if x == 'yes' or x == 'Yes' or x == 'YES':
         i = AorU()
-        if i == 10:
-            print("Wrong Password! Try again or creat a new account.")
+        if i == 10 or i == 11:
             login()
-        elif i == 11:
-            print("We can't find your account. Try for another account or make one.")
-            login()
+    elif x == 'No' or x == 'NO' or x = 'no':
+        
+    else:
+        print('Answer with yes/no.')
+        login()
 
 login()
