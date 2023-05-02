@@ -60,6 +60,28 @@ Admins = {'usernames': [],
           'passwords': []}
 
 
+def passwordMaker(i):
+    password = input('Enter a password. (only made by numbers)')
+    if type(password) == int:
+        Users['passwords'].append()
+        print('Welcome ' + str(i) + '! Now login your account.')
+        AorU()
+    else:
+        print('Enter a NUMBER password!')
+        passwordMaker()
+
+
+def creatUserAccount():
+    name = input('Enter a username: ')
+    for i in Users['usernames']:
+        if i == name:
+            print("Sorry! you can't use this username. Choose another.")
+            creatUserAccount()
+            break
+        Users['usernames'].append()
+        passwordMaker(name)
+
+
 def TrueUserLogin(username, password):
     TrueUsername = 0
     TruePassword = 0
@@ -98,22 +120,22 @@ def TrueAdminLogin(username, password):
 def AorU():
     x = input('Are you an Admin or a User? Type "A" for admin and "U" for user.')
     if x == 'A':
-        username = input("Enter your user name:")
-        password = input("Enter your password:")
+        username = input("Enter your user name: ")
+        password = input("Enter your password: ")
         TrueAdminLogin(username, password)
         if TrueAdminLogin(username, password) == 10:
-            print("Wrong Password! Try again or creat a new account.")
+            print("Wrong Password! Try again or create a new account.")
             return 10
         if TrueAdminLogin(username, password) == 11:
             print("We can't find your account. Try for another account (user one maybe!) or make one.")
             return 11
 
     elif x == 'U':
-        username = input("Enter your user name:")
-        password = input("Enter your password:")
+        username = input("Enter your user name: ")
+        password = input("Enter your password: ")
         TrueUserLogin(username, password)
         if TrueUserLogin(username, password) == 10:
-            print("Wrong Password! Try again or creat a new account.")
+            print("Wrong Password! Try again or create a new account.")
             return 10
         if TrueUserLogin(username, password) == 11:
             print("We can't find your account. Try for another account or make one.")
@@ -124,7 +146,7 @@ def AorU():
 
 
 def login():
-    x = input("Do you have an account?")
+    x = input("Do you have an account? ")
     if x == 'yes' or x == 'Yes' or x == 'YES':
         i = AorU()
         if i == 10 or i == 11:
