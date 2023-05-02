@@ -58,6 +58,10 @@ Users = {}
 Admins = {'Ava': 1234, 'Nima': 1234, 'Sadra': 1234}
 
 
+def Shopping():
+    print()
+
+
 def passwordMaker(i):
     password = eval(input('Enter a password. (only made by numbers) '))
     if type(password) == int:
@@ -85,6 +89,7 @@ def TrueUserLogin(username, password):
         if Users[username] == password:
             TruePassword = 1
             print('You are logged in!')
+            Shopping()
     if TrueUsername == 1 and TruePassword == 0:
         return 10
 # اکانت وجود داره ولی پسورد غلطه
@@ -125,11 +130,11 @@ def AorU():
     elif x == 'U':
         username = input("Enter your user name: ")
         password = eval(input("Enter your password: "))
-        TrueUserLogin(username, password)
-        if TrueUserLogin(username, password) == 10:
+        t = TrueUserLogin(username, password)
+        if t == 10:
             print("Wrong Password! Try again or create a new account.")
             return 10
-        if TrueUserLogin(username, password) == 11:
+        if t == 11:
             print("We can't find your account. Try for another account or make one.")
             return 11
     else:
