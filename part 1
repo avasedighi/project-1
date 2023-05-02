@@ -62,23 +62,15 @@ def Shopping():
     print()
 
 
-def passwordMaker(i):
-    password = eval(input('Enter a password. (only made by numbers) '))
-    if type(password) == int:
-        Users[i] = password
-        print('Welcome ' + str(i) + '! Now login your account.')
-        AorU()
-    else:
-        print('Enter a NUMBER password!')
-        passwordMaker()
-
-
 def creatUserAccount():
     name = input('Enter a username: ')
     if name in Users.keys():
         print("Sorry! you can't use this username. Choose another.")
         creatUserAccount()
-    passwordMaker(name)
+    password = input('Enter a password. (only made by numbers) ')
+    Users[name] = password
+    print('Welcome ' + str(name) + '! Now login your account.')
+    AorU()
 
 
 def TrueUserLogin(username, password):
@@ -118,7 +110,7 @@ def AorU():
     x = input('Are you an Admin or a User? Type "A" for admin and "U" for user. ')
     if x == 'A':
         username = input("Enter your user name: ")
-        password = eval(input("Enter your password: "))
+        password = input("Enter your password: ")
         TrueAdminLogin(username, password)
         if TrueAdminLogin(username, password) == 10:
             print("Wrong Password! Try again or create a new account.")
@@ -129,7 +121,7 @@ def AorU():
 
     elif x == 'U':
         username = input("Enter your user name: ")
-        password = eval(input("Enter your password: "))
+        password = input("Enter your password: ")
         t = TrueUserLogin(username, password)
         if t == 10:
             print("Wrong Password! Try again or create a new account.")
