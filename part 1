@@ -53,17 +53,15 @@ house_3 = Lego('House', 44.99, 604, 'C', 1056, 16)
 print('Hello!')
 print('Welcome to our LEGO Shop!')
 
-Users = {'usernames': [],
-         'passwords': []}
+Users = {}
 
-Admins = {'usernames': [],
-          'passwords': []}
+Admins = {'Ava': 1234, 'Nima': 1234, 'Sadra': 1234}
 
 
 def passwordMaker(i):
-    password = input('Enter a password. (only made by numbers)')
+    password = eval(input('Enter a password. (only made by numbers) '))
     if type(password) == int:
-        Users['passwords'].append()
+        Users[i] = password
         print('Welcome ' + str(i) + '! Now login your account.')
         AorU()
     else:
@@ -73,25 +71,20 @@ def passwordMaker(i):
 
 def creatUserAccount():
     name = input('Enter a username: ')
-    for i in Users['usernames']:
-        if i == name:
-            print("Sorry! you can't use this username. Choose another.")
-            creatUserAccount()
-            break
-        Users['usernames'].append()
-        passwordMaker(name)
+    if name in Users.keys():
+        print("Sorry! you can't use this username. Choose another.")
+        creatUserAccount()
+    passwordMaker(name)
 
 
 def TrueUserLogin(username, password):
     TrueUsername = 0
     TruePassword = 0
-    for i in Users['usernames']:
-        if i == username:
-            TrueUsername = 1
-            if Users['passwords'][i] == password:
-                TruePassword = 1
-                print('You are logged in!')
-            break
+    if username in Users.keys():
+        TrueUsername = 1
+        if Users[username] == password:
+            TruePassword = 1
+            print('You are logged in!')
     if TrueUsername == 1 and TruePassword == 0:
         return 10
 # اکانت وجود داره ولی پسورد غلطه
@@ -103,13 +96,11 @@ def TrueUserLogin(username, password):
 def TrueAdminLogin(username, password):
     TrueUsername = 0
     TruePassword = 0
-    for i in Admins['usernames']:
-        if i == Admins:
-            TrueUsername = 1
-            if Admins['passwords'][i] == password:
-                TruePassword = 1
-                print('Welcome Sir. You are logged in!')
-            break
+    if username in Admins.keys():
+        TrueUsername = 1
+        if Admins[username] == password:
+            TruePassword = 1
+            print('Welcom Sir! You are logged in.')
     if TrueUsername == 1 and TruePassword == 0:
         return 10
 # اکانت وجود داره ولی پسورد غلطه
@@ -117,11 +108,12 @@ def TrueAdminLogin(username, password):
         return 11
 # اکانت وجود نداره
 
+
 def AorU():
-    x = input('Are you an Admin or a User? Type "A" for admin and "U" for user.')
+    x = input('Are you an Admin or a User? Type "A" for admin and "U" for user. ')
     if x == 'A':
         username = input("Enter your user name: ")
-        password = input("Enter your password: ")
+        password = eval(input("Enter your password: "))
         TrueAdminLogin(username, password)
         if TrueAdminLogin(username, password) == 10:
             print("Wrong Password! Try again or create a new account.")
@@ -132,7 +124,7 @@ def AorU():
 
     elif x == 'U':
         username = input("Enter your user name: ")
-        password = input("Enter your password: ")
+        password = eval(input("Enter your password: "))
         TrueUserLogin(username, password)
         if TrueUserLogin(username, password) == 10:
             print("Wrong Password! Try again or create a new account.")
@@ -152,7 +144,8 @@ def login():
         if i == 10 or i == 11:
             login()
     elif x == 'No' or x == 'NO' or x == 'no':
-        
+        print("Let's make one!")
+        creatUserAccount()
     else:
         print('Answer with yes/no.')
         login()
