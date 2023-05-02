@@ -129,7 +129,7 @@ def login():
         i = AorU()
         if i == 10 or i == 11:
             login()
-    elif x == 'No' or x == 'NO' or x = 'no':
+    elif x == 'No' or x == 'NO' or x == 'no':
         
     else:
         print('Answer with yes/no.')
