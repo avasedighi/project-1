@@ -63,12 +63,15 @@ def TrueLogin(username, password):
     for i in Users['usernames']:
         if i == username:
             TrueUsername = 1
-            for j in Users['usernames']:
-                if j == password:
-                    TruePassword = 1
-                    print('You are logged in!')
-                    break
-    if TrueUsername == 0 or TruePassword == 0:
+            if Users['passwords'][i] == password:
+                TruePassword = 1
+                print('You are logged in!')
+            break
+    if TrueUsername == 1 and TruePassword == 0:
+        print("Wrong Password! Try again or creat a new account.")
+        return False
+    if TrueUsername == 0 and TruePassword == 0:
+        print("We can't find your account. Try for another account or make one.")
         return False
 
 
@@ -79,6 +82,7 @@ def AorU():
         username = input("Enter your user name:")
         password = input("Enter your password:")
         TrueLogin(username, password)
+
     elif x == 'U':
         username = input("Enter your user name:")
         password = input("Enter your password:")
@@ -91,5 +95,8 @@ def login():
     x = input("Do you have an account?")
     if x == 'yes' or x == 'Yes' or x == 'YES':
         AorU()
+        if ~AorU():
+            print("We can't find your account. Try for another account or creat one.")
+            login()
 
 login()
