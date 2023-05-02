@@ -50,3 +50,46 @@ house_1 = Lego('House', 89.99, 3101, 'A', 7089, 23)
 house_2 = Lego('House', 89.99, 1780, 'B', 4178, 30)
 house_3 = Lego('House', 44.99, 604, 'C', 1056, 16)
 
+print('Hello!')
+print('Welcome to our LEGO Shop!')
+
+Users = {'usernames': [],
+         'passwords': []}
+
+
+def TrueLogin(username, password):
+    TrueUsername = 0
+    TruePassword = 0
+    for i in Users['usernames']:
+        if i == username:
+            TrueUsername = 1
+            for j in Users['usernames']:
+                if j == password:
+                    TruePassword = 1
+                    print('You are logged in!')
+                    break
+    if TrueUsername == 0 or TruePassword == 0:
+        return False
+
+
+def AorU():
+    x = input('Are you an Admin or a User? Type "A" for admin and "U" for user.')
+    if x == 'A':
+        print(x)
+        username = input("Enter your user name:")
+        password = input("Enter your password:")
+        TrueLogin(username, password)
+    elif x == 'U':
+        username = input("Enter your user name:")
+        password = input("Enter your password:")
+    else:
+        print('Enter a valid answer please.')
+        AorU()
+
+
+def login():
+    x = input("Do you have an account?")
+    if x == 'yes' or x == 'Yes' or x == 'YES':
+        AorU()
+
+login()
