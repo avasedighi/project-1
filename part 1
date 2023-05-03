@@ -90,8 +90,6 @@ def TrueUserLogin(username, password):
 # اکانت وجود نداره
 
 
-
-
 def TrueAdminLogin(username, password):
     TrueUsername = 0
     TruePassword = 0
