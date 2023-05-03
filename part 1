@@ -69,7 +69,7 @@ def creatUserAccount():
         creatUserAccount()
     password = input('Enter a password. (only made by numbers) ')
     Users[name] = password
-    print('Welcome ' + str(name) + '! Now login your account.')
+    print('Welcome ' + str(name) + '! Now login your new user account.')
     AorU()
 
 
@@ -111,11 +111,11 @@ def AorU():
     if x == 'A':
         username = input("Enter your user name: ")
         password = input("Enter your password: ")
-        TrueAdminLogin(username, password)
-        if TrueAdminLogin(username, password) == 10:
+        t = TrueAdminLogin(username, password)
+        if t == 10:
             print("Wrong Password! Try again or create a new account.")
             return 10
-        if TrueAdminLogin(username, password) == 11:
+        if t == 11:
             print("We can't find your account. Try for another account (user one maybe!) or make one.")
             return 11
 
