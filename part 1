@@ -67,7 +67,7 @@ def creatUserAccount():
     if name in Users.keys():
         print("Sorry! you can't use this username. Choose another.")
         creatUserAccount()
-    password = input('Enter a password. (only made by numbers) ')
+    password = input('Enter a password.')
     Users[name] = password
     print('Welcome ' + str(name) + '! Now login your new user account.')
     AorU()
