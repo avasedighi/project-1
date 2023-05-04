@@ -24,50 +24,102 @@ class User:
 
 
 class Lego:
-    def __init__(self, title: str, price: float, pieces: int,
-                 ageRate: str, item: int, stockCount: int):
+    def __init__(self, title: str, price: float, pieces: int, ageRate: str,
+                 item: int, stockCount: int, idCode: int):
         self.title = title
         self.price = price
         self.pieces = pieces
         self.ageRate = ageRate
         self.item = item
         self._stockCount = stockCount
+        self.idCode = idCode
 
 
-grand_piano_1 = Lego('Grand Piano', 399.99, 3662, 'A', 21323, 3)
-grand_piano_2 = Lego('Grand Piano', 249.99, 1780, 'B', 10562, 4)
-grand_piano_3 = Lego('Grand Piano', 99.99, 431, 'C', 1098, 9)
+grand_piano_1 = Lego('Grand Piano-A', 399.99, 3662, 'A', 21323, 3, 101)
+grand_piano_2 = Lego('Grand Piano-B', 249.99, 1780, 'B', 10562, 4, 102)
+grand_piano_3 = Lego('Grand Piano-C', 99.99, 431, 'C', 1098, 9, 103)
 
-eiffel_tower_1 = Lego('Eiffel Tower', 629.99, 10001, 'A', 1098, 10)
-eiffel_tower_2 = Lego('Eiffel Tower', 539.99, 8893, 'B', 850, 1)
-eiffel_tower_3 = Lego('Eiffel Tower', 349.99, 1087, 'C', 460, 4)
+eiffel_tower_1 = Lego('Eiffel Tower-A', 629.99, 10001, 'A', 1098, 10, 201)
+eiffel_tower_2 = Lego('Eiffel Tower-B', 539.99, 8893, 'B', 850, 1, 202)
+eiffel_tower_3 = Lego('Eiffel Tower-C', 349.99, 1087, 'C', 460, 4, 203)
 
-car_1 = Lego('porsche 911', 290.99, 2308, 'A', 10295, 17)
-car_2 = Lego('porsche 911', 169.99, 1458, 'B', 4056, 29)
-car_3 = Lego('porsche 911', 89.99, 560, 'C', 1105, 27)
+car_1 = Lego('porsche-A', 290.99, 2308, 'A', 10295, 17, 301)
+car_2 = Lego('porsche-B', 169.99, 1458, 'B', 4056, 29, 302)
+car_3 = Lego('porsche-C', 89.99, 560, 'C', 1105, 27, 303)
 
-house_1 = Lego('House', 89.99, 3101, 'A', 7089, 23)
-house_2 = Lego('House', 89.99, 1780, 'B', 4178, 30)
-house_3 = Lego('House', 44.99, 604, 'C', 1056, 16)
+house_1 = Lego('House-A', 89.99, 3101, 'A', 7089, 23, 401)
+house_2 = Lego('House-B', 89.99, 1780, 'B', 4178, 30, 402)
+house_3 = Lego('House-C', 44.99, 604, 'C', 1056, 16, 403)
+
+
+stuff = [grand_piano_1, grand_piano_2, grand_piano_3, house_1, house_2, house_3,
+         eiffel_tower_1, eiffel_tower_2, eiffel_tower_3, car_1, car_2, car_3]
 
 print('Hello!')
 print('Welcome to our LEGO Shop!')
 
 Users = {}
 
-Admins = {'Ava': 1234, 'Nima': 1234, 'Sadra': 1234}
+Admins = {'Ava': '1234', 'Nima': '1234', 'Sadra': '1234'}
 
 
-def Shopping():
+def shoppingBag():
     print()
+
+
+def showAvailable(age_range):
+    print("")
+    print("These products are available:")
+    print("")
+    for i in stuff:
+        if i._stockCount != 0 and i.ageRate == age_range:
+            print(i.title, i.idCode)
+            print(i.price, '$')
+
+
+def shop():
+    print("Choose an age range to find your Lego. (A: 18-85, B: 12-18, C: 7-12)")
+    print("Type 'menu' to back to menu.")
+    x = input()
+    if x == 'A':
+        showAvailable('A')
+
+    if x == 'B':
+        showAvailable('B')
+
+    if x == 'C':
+        showAvailable('C')
+
+
+def mainMenu():
+    print("Type 'shop' to check Legos.")
+    print("Type 'bag' if you want to check your shopping bag.")
+    print("Type log out to back to log out.")
+    x = input()
+
+    if x == 'shop' or x == 'Shop' or x == 'SHOP':
+        shop()
+
+    if x == 'bag' or x == 'Bag' or x == 'BAG':
+        shoppingBag()
+
+    if x == 'logout' or x == 'Logout' or x == 'log out' or x == 'Log out':
+        print("You're logged out.")
+        login()
+
+    else:
+        print("Enter a valid command please. :)")
+        mainMenu()
 
 
 def creatUserAccount():
     name = input('Enter a username: ')
+
     if name in Users.keys():
         print("Sorry! you can't use this username. Choose another.")
         creatUserAccount()
-    password = input('Enter a password.')
+
+    password = input('Enter a password. ')
     Users[name] = password
     print('Welcome ' + str(name) + '! Now login your new user account.')
     AorU()
@@ -76,14 +128,17 @@ def creatUserAccount():
 def TrueUserLogin(username, password):
     TrueUsername = 0
     TruePassword = 0
+
     if username in Users.keys():
         TrueUsername = 1
         if Users[username] == password:
             TruePassword = 1
-            print('You are logged in!')
-            Shopping()
+            print('Welcom ' + str(username) + ' ! You are logged in!')
+            mainMenu
+
     if TrueUsername == 1 and TruePassword == 0:
         return 10
+
 # اکانت وجود داره ولی پسورد غلطه
     if TrueUsername == 0 and TruePassword == 0:
         return 11
@@ -93,13 +148,16 @@ def TrueUserLogin(username, password):
 def TrueAdminLogin(username, password):
     TrueUsername = 0
     TruePassword = 0
+
     if username in Admins.keys():
         TrueUsername = 1
         if Admins[username] == password:
             TruePassword = 1
             print('Welcom Sir! You are logged in.')
+
     if TrueUsername == 1 and TruePassword == 0:
         return 10
+
 # اکانت وجود داره ولی پسورد غلطه
     if TrueUsername == 0 and TruePassword == 0:
         return 11
@@ -112,9 +170,11 @@ def AorU():
         username = input("Enter your user name: ")
         password = input("Enter your password: ")
         t = TrueAdminLogin(username, password)
+
         if t == 10:
             print("Wrong Password! Try again or create a new account.")
             return 10
+
         if t == 11:
             print("We can't find your account. Try for another account (user one maybe!) or make one.")
             return 11
@@ -123,12 +183,15 @@ def AorU():
         username = input("Enter your user name: ")
         password = input("Enter your password: ")
         t = TrueUserLogin(username, password)
+
         if t == 10:
             print("Wrong Password! Try again or create a new account.")
             return 10
+
         if t == 11:
             print("We can't find your account. Try for another account or make one.")
             return 11
+
     else:
         print('Enter a valid answer please.(A or U)')
         AorU()
@@ -136,15 +199,19 @@ def AorU():
 
 def login():
     x = input("Do you have an account? ")
+
     if x == 'yes' or x == 'Yes' or x == 'YES':
         i = AorU()
         if i == 10 or i == 11:
             login()
+
     elif x == 'No' or x == 'NO' or x == 'no':
         print("Let's make one!")
         creatUserAccount()
+
     else:
         print('Answer with yes/no.')
         login()
+
 
 login()
