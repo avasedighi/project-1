@@ -1,28 +1,3 @@
-class Date:
-    def __init__(self, year: int, month: int, day: int):
-        self.year = year
-        self.month = month
-        self.day = day
-
-
-class Time:
-    def __init__(self, hour: int, minute: int, second: int):
-        self.hour = hour
-        self.minute = minute
-        self.second = second
-
-
-class User:
-    def __init__(self, name: str, lastName: str, sex: str, birthDate: Date,
-                 phoneNumber: str, emailAddress: str, password: int):
-        self.name = name
-        self.lastName = lastName
-        self.password = password
-        self.sex = sex
-        self.birthDate = birthDate
-        self._phoneNumber = phoneNumber
-
-
 class Lego:
     def __init__(self, title: str, price: float, pieces: int, ageRate: str,
                  item: int, stockCount: int, idCode: int):
