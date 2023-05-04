@@ -1,3 +1,5 @@
+
+
 class Lego:
     def __init__(self, title: str, price: float, pieces: int, ageRate: str,
                  item: int, stockCount: int, idCode: int):
@@ -10,21 +12,21 @@ class Lego:
         self.idCode = idCode
 
 
-grand_piano_1 = Lego('Grand Piano-A', 399.99, 3662, 'A', 21323, 3, 101)
-grand_piano_2 = Lego('Grand Piano-B', 249.99, 1780, 'B', 10562, 4, 102)
-grand_piano_3 = Lego('Grand Piano-C', 99.99, 431, 'C', 1098, 9, 103)
+grand_piano_1 = Lego('Grand Piano', 399.99, 3662, 'A', 21323, 3, 101)
+grand_piano_2 = Lego('Grand Piano', 249.99, 1780, 'B', 10562, 4, 102)
+grand_piano_3 = Lego('Grand Piano', 99.99, 431, 'C', 1098, 0, 103)
 
-eiffel_tower_1 = Lego('Eiffel Tower-A', 629.99, 10001, 'A', 1098, 10, 201)
-eiffel_tower_2 = Lego('Eiffel Tower-B', 539.99, 8893, 'B', 850, 1, 202)
-eiffel_tower_3 = Lego('Eiffel Tower-C', 349.99, 1087, 'C', 460, 4, 203)
+eiffel_tower_1 = Lego('Eiffel Tower', 629.99, 10001, 'A', 1098, 10, 201)
+eiffel_tower_2 = Lego('Eiffel Tower', 539.99, 8893, 'B', 850, 0, 202)
+eiffel_tower_3 = Lego('Eiffel Tower', 349.99, 1087, 'C', 460, 4, 203)
 
-car_1 = Lego('porsche-A', 290.99, 2308, 'A', 10295, 17, 301)
-car_2 = Lego('porsche-B', 169.99, 1458, 'B', 4056, 29, 302)
-car_3 = Lego('porsche-C', 89.99, 560, 'C', 1105, 27, 303)
+car_1 = Lego('porsche', 290.99, 2308, 'A', 10295, 17, 301)
+car_2 = Lego('porsche', 169.99, 1458, 'B', 4056, 29, 302)
+car_3 = Lego('porsche', 89.99, 560, 'C', 1105, 27, 303)
 
-house_1 = Lego('House-A', 89.99, 3101, 'A', 7089, 23, 401)
-house_2 = Lego('House-B', 89.99, 1780, 'B', 4178, 30, 402)
-house_3 = Lego('House-C', 44.99, 604, 'C', 1056, 16, 403)
+house_1 = Lego('House', 89.99, 3101, 'A', 7089, 23, 401)
+house_2 = Lego('House', 89.99, 1780, 'B', 4178, 30, 402)
+house_3 = Lego('House', 44.99, 604, 'C', 1056, 16, 403)
 
 
 stuff = [grand_piano_1, grand_piano_2, grand_piano_3, house_1, house_2, house_3,
@@ -38,7 +40,7 @@ Users = {}
 Admins = {'Ava': '1234', 'Nima': '1234', 'Sadra': '1234'}
 
 
-def shoppingBag():
+def shoppingBag(username, lego):
     print()
 
 
@@ -72,7 +74,6 @@ def showAvailable(age_range):
     x = input("Type the id code of each Lego to see more details or type 'back' to back to menu.")
     if x == 'back':
         mainMenu()
-
     else:
         showDetailes(x, age_range)
 
@@ -138,7 +139,8 @@ def TrueUserLogin(username, password):
         if Users[username] == password:
             TruePassword = 1
             print('Welcom ' + str(username) + ' ! You are logged in!')
-            mainMenu
+            mainMenu()
+
 
     if TrueUsername == 1 and TruePassword == 0:
         return 10
