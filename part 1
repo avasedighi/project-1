@@ -69,8 +69,11 @@ def shoppingBag():
 
 def showDetailes(x):
     for i in stuff:
-        if i.idCode == x:
+        if x == i.idCode:
             print(f"This Lego has {i.pieces} pieces and {i.item} items. Only {i.price} $!")
+            break
+        print("we don't have any Lego with this code. please enter the id code more carefully.")
+        shop()
 
 
 def showAvailable(age_range):
@@ -82,8 +85,12 @@ def showAvailable(age_range):
             print(i.title, i.idCode)
             print(i.price, '$')
             print("")
-    x = input("Type the id code of each Lego to see more details.")
-    showDetailes(x)
+    x = eval(input("Type the id code of each Lego to see more details. "))
+    if type(x) == int:
+        showDetailes(x)
+    else:
+        print("Enter an id code please.")
+        shop()
 
 
 def shop():
