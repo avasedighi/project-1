@@ -67,6 +67,12 @@ def shoppingBag():
     print()
 
 
+def showDetailes(x):
+    for i in stuff:
+        if i.idCode == x:
+            print(f"This Lego has {i.pieces} pieces and {i.item} items. Only {i.price} $!")
+
+
 def showAvailable(age_range):
     print("")
     print("These products are available:")
@@ -75,20 +81,27 @@ def showAvailable(age_range):
         if i._stockCount != 0 and i.ageRate == age_range:
             print(i.title, i.idCode)
             print(i.price, '$')
+            print("")
+    x = input("Type the id code of each Lego to see more details.")
+    showDetailes(x)
 
 
 def shop():
     print("Choose an age range to find your Lego. (A: 18-85, B: 12-18, C: 7-12)")
     print("Type 'menu' to back to menu.")
     x = input()
-    if x == 'A':
+    if x == 'A' or x == 'a':
         showAvailable('A')
 
-    if x == 'B':
+    elif x == 'B' or x == 'b':
         showAvailable('B')
 
-    if x == 'C':
+    elif x == 'C' or x == 'b':
         showAvailable('C')
+
+    else:
+        print("Enter a valid command.")
+        shop()
 
 
 def mainMenu():
@@ -100,10 +113,10 @@ def mainMenu():
     if x == 'shop' or x == 'Shop' or x == 'SHOP':
         shop()
 
-    if x == 'bag' or x == 'Bag' or x == 'BAG':
+    elif x == 'bag' or x == 'Bag' or x == 'BAG':
         shoppingBag()
 
-    if x == 'logout' or x == 'Logout' or x == 'log out' or x == 'Log out':
+    elif x == 'logout' or x == 'Logout' or x == 'log out' or x == 'Log out':
         print("You're logged out.")
         login()
 
