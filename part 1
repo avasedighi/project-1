@@ -70,7 +70,7 @@ def shoppingBag():
 def showDetailes(x):
     for i in stuff:
         if x == i.idCode:
-            print(f"This Lego has {i.pieces} pieces and {i.item} items. Only {i.price} $!")
+            print(f"This Lego has {i.pieces} pieces and {i.item} items. All of these ONLY {i.price} $!")
             break
         print("we don't have any Lego with this code. please enter the id code more carefully.")
         shop()
