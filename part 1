@@ -107,7 +107,7 @@ def shop():
 def mainMenu():
     print("Type 'shop' to check Legos.")
     print("Type 'bag' if you want to check your shopping bag.")
-    print("Type log out to back to log out.")
+    print("Type log out to log out.")
     x = input()
 
     if x == 'shop' or x == 'Shop' or x == 'SHOP':
