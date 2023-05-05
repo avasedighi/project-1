@@ -41,7 +41,10 @@ Admins = {'Ava': '1234', 'Nima': '1234', 'Sadra': '1234'}
 
 shopping_bag = {}
 
-def shoppingBag(username, lego):
+loggedin_user = 0
+
+
+def shoppingBag(loggedin_user):
     print()
 
 
@@ -107,7 +110,7 @@ def mainMenu():
         shop()
 
     elif x == 'bag' or x == 'Bag' or x == 'BAG':
-        shoppingBag()
+        shoppingBag(loggedin_user)
 
     elif x == 'logout' or x == 'Logout' or x == 'log out' or x == 'Log out':
         print("You're logged out.")
@@ -127,6 +130,8 @@ def creatUserAccount():
 
     password = input('Enter a password. ')
     Users[name] = password
+    shopping_bag[name] = []
+
     print('Welcome ' + str(name) + '! Now login your new user account.')
     AorU()
 
@@ -139,9 +144,9 @@ def TrueUserLogin(username, password):
         TrueUsername = 1
         if Users[username] == password:
             TruePassword = 1
-            print('Welcom ' + str(username) + ' ! You are logged in!')
+            print('Welcom ' + str(username) + '! You are logged in!')
+            loggedin_user = username
             mainMenu()
-
 
     if TrueUsername == 1 and TruePassword == 0:
         return 10
