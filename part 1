@@ -46,7 +46,20 @@ loggedin_user = 0
 
 def buy(i):
     shopping_bag[loggedin_user].append(i)
-    print()
+    print("Ok, this lego is on your bag. Type 'shop' to continue shopping")
+    print("Type 'next' to checkout and type 'menu' to back to menu.")
+    x = input()
+
+    if x == 'shop':
+        shop()
+    elif x == 'next':
+        x
+    elif x == 'menu':
+        mainMenu()
+    else:
+        print("Enter a valid command please!")
+        print("")
+        buy(i)
 
 
 def showDetailes(x, age_range):
