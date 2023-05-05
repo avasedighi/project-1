@@ -44,11 +44,8 @@ shopping_bag = {}
 loggedin_user = 0
 
 
-def shoppingBag(loggedin_user):
-    print()
-
-
-def buy():
+def buy(i):
+    shopping_bag[loggedin_user].append(i)
     print()
 
 
@@ -57,11 +54,13 @@ def showDetailes(x, age_range):
         if x == str(i.idCode):
             print(f"This Lego has {i.pieces} pieces and {i.item} items. All of these ONLY {i.price} $!")
             buy = input("Type 'add' to add this Lego to your bag and type 'back' to back to other Legos.")
+
             if buy == 'add':
-                buy()
+                buy(i)
             elif buy == 'back':
                 showAvailable(age_range)
             break
+
         print("we don't have any Lego with this code. please enter the id code more carefully.")
         showAvailable(age_range)
 
