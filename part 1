@@ -110,7 +110,11 @@ def mainMenu():
         shop()
 
     elif x == 'bag' or x == 'Bag' or x == 'BAG':
-        shoppingBag(loggedin_user)
+        if len(shopping_bag[loggedin_user]) >= 1:
+            print(shopping_bag[loggedin_user])
+        else:
+            print("Your bag is empty. Let's shop.")
+            shop()
 
     elif x == 'logout' or x == 'Logout' or x == 'log out' or x == 'Log out':
         print("You're logged out.")
