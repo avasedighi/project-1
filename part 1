@@ -39,6 +39,7 @@ Users = {}
 
 Admins = {'Ava': '1234', 'Nima': '1234', 'Sadra': '1234'}
 
+shopping_bag = {}
 
 def shoppingBag(username, lego):
     print()
