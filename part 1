@@ -174,16 +174,26 @@ shopping_bag = {}
 
 
 def checkout(lego, n, username):
-    print(f"{lego.price} * {n} = {lego.price * n} dollars.")
+    print(f"{lego.price} * {n} + 5 (delivery) = {lego.price * n + 5} dollars.")
     cardNumber = input("Enter your credit card number: ")
     if len(cardNumber) == 16:
         print("Checked out succesfully.")
         lego.stockCount = lego.stockCount - n
         shopping_bag[username] = []
-        
+        mainMenu(username)
+
     else:
         print("EROR! try again for checking out.")
-        checkout()
+        checkout(lego, n, username)
+
+
+def howMany(lego, username):
+    n = 1
+    n = int(input(f"How many {lego.title} do you want? (up to {lego.stockCount})"))
+    if n > lego.stockCount:
+        print(f"Up to {lego.stockCount} please!")
+        howMany(username, lego)
+    return n
 
 
 def buying(lego, username):
@@ -191,10 +201,10 @@ def buying(lego, username):
     print("Ok, this lego is in your bag. Type 'shop' to continue shopping")
     print("Type 'next' to checkout and type 'menu' to back to menu.")
     x = input()
-
     if x == 'shop':
         shop(username)
     elif x == 'next':
+        n = howMany(lego, username)
         # Creating an instance of the Logistic class
         logistic = Logistic()
 
