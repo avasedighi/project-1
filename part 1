@@ -208,11 +208,6 @@ def buying(lego, username):
             else:
                 print("Address not confirmed. Please try again.")
 
-            Frequest = input("do you have any other request? Enter 'Y' if yes. Else enter 'N'.\n\n")
-            if Frequest == 'N':
-                # for i in logistic.users_address:
-                #   print(i,"\n**********")
-                exit(0)
 
     elif x == 'menu':
         mainMenu(username)
