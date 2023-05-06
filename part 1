@@ -173,13 +173,19 @@ Admins = {'Ava': '1234', 'Nima': '1234', 'Sadra': '1234'}
 shopping_bag = {}
 
 
-def checkout(lego, n, username):
+def checkout(lego, n, username, a):
     print(f"{lego.price} * {n} + 5 (delivery) = {lego.price * n + 5} dollars.")
     cardNumber = input("Enter your credit card number: ")
     if len(cardNumber) == 16:
         print("Checked out succesfully.")
         lego.stockCount = lego.stockCount - n
         shopping_bag[username] = []
+        order_number = random(16)
+        a['name'].append(n)
+        a['id'].append(order_number)
+        a['price'].append(lego.price * n + 5)
+        a['shipping_cost'].append(5)
+        a['tax'].append(0.09 * lego.price * n)
         mainMenu(username)
 
     else:
