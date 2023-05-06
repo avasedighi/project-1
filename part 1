@@ -89,6 +89,11 @@ def showAvailable(age_range, username):
             print(i.title, i.idCode)
             print(i.price, '$')
             print("")
+        if i._stockCount == 0 and i.ageRate == age_range:
+            print(i.title, i.idCode)
+            print('Unavailable')
+            print("")
+
     x = input("Type the id code of each Lego to see more details or type 'back' to back to menu. ")
     if x == 'back':
         mainMenu()
