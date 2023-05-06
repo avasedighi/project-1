@@ -41,44 +41,46 @@ Admins = {'Ava': '1234', 'Nima': '1234', 'Sadra': '1234'}
 
 shopping_bag = {}
 
-loggedin_user = 0
 
 
-def buy(i):
-    shopping_bag[loggedin_user].append(i)
-    print("Ok, this lego is on your bag. Type 'shop' to continue shopping")
+
+def buying(lego, username):
+    shopping_bag[username].append(lego)
+    print("Ok, this lego is in your bag. Type 'shop' to continue shopping")
     print("Type 'next' to checkout and type 'menu' to back to menu.")
     x = input()
 
     if x == 'shop':
-        shop()
+        shop(username)
     elif x == 'next':
-        x
+        address = input("Alright, Enter an address ")
     elif x == 'menu':
-        mainMenu()
+        mainMenu(username)
     else:
         print("Enter a valid command please!")
         print("")
-        buy(i)
+        buying(lego, username)
 
 
-def showDetailes(x, age_range):
+def showDetailes(x, age_range, username):
+    tru = 0
     for i in stuff:
         if x == str(i.idCode):
             print(f"This Lego has {i.pieces} pieces and {i.item} items. All of these ONLY {i.price} $!")
-            buy = input("Type 'add' to add this Lego to your bag and type 'back' to back to other Legos.")
-
+            buy = input("Type 'add' to add this Lego to your bag and type 'back' to back to other Legos. ")
             if buy == 'add':
-                buy(i)
+                buying(i, username)
             elif buy == 'back':
                 showAvailable(age_range)
+                tru = 1
             break
 
+    if tru == 0:
         print("we don't have any Lego with this code. please enter the id code more carefully.")
-        showAvailable(age_range)
+        showAvailable(age_range, username)
 
 
-def showAvailable(age_range):
+def showAvailable(age_range, username):
     print("")
     print("These products are available:")
     print("")
@@ -87,46 +89,49 @@ def showAvailable(age_range):
             print(i.title, i.idCode)
             print(i.price, '$')
             print("")
-    x = input("Type the id code of each Lego to see more details or type 'back' to back to menu.")
+    x = input("Type the id code of each Lego to see more details or type 'back' to back to menu. ")
     if x == 'back':
         mainMenu()
     else:
-        showDetailes(x, age_range)
+        showDetailes(x, age_range, username)
 
 
-def shop():
+def shop(username):
     print("Choose an age range to find your Lego. (A: 18-85, B: 12-18, C: 7-12)")
     print("Type 'menu' to back to menu.")
     x = input()
     if x == 'A' or x == 'a':
-        showAvailable('A')
+        showAvailable('A', username)
 
     elif x == 'B' or x == 'b':
-        showAvailable('B')
+        showAvailable('B', username)
 
     elif x == 'C' or x == 'b':
-        showAvailable('C')
+        showAvailable('C', username)
 
     else:
         print("Enter a valid command.")
-        shop()
+        shop(username)
 
 
-def mainMenu():
+def mainMenu(username):
     print("Type 'shop' to check Legos.")
     print("Type 'bag' if you want to check your shopping bag.")
     print("Type log out to log out.")
     x = input()
 
     if x == 'shop' or x == 'Shop' or x == 'SHOP':
-        shop()
+        shop(username)
 
     elif x == 'bag' or x == 'Bag' or x == 'BAG':
-        if len(shopping_bag[loggedin_user]) >= 1:
-            print(shopping_bag[loggedin_user])
+        if len(shopping_bag[username]) >= 1:
+            for i in shopping_bag[username]:
+                print(i.title, i.idCode)
+                print(i.price, '$')
+                print("")
         else:
             print("Your bag is empty. Let's shop.")
-            shop()
+            shop(username)
 
     elif x == 'logout' or x == 'Logout' or x == 'log out' or x == 'Log out':
         print("You're logged out.")
@@ -134,7 +139,7 @@ def mainMenu():
 
     else:
         print("Enter a valid command please. :)")
-        mainMenu()
+        mainMenu(username)
 
 
 def creatUserAccount():
@@ -162,7 +167,7 @@ def TrueUserLogin(username, password):
             TruePassword = 1
             print('Welcom ' + str(username) + '! You are logged in!')
             loggedin_user = username
-            mainMenu()
+            mainMenu(username)
 
     if TrueUsername == 1 and TruePassword == 0:
         return 10
