@@ -1,4 +1,134 @@
 
+import pandas as pd
+from pathlib import Path
+
+print('Hello!')
+print('Welcome to our LEGO Shop!')
+
+
+
+class Address:
+    def __init__(self, username, county, city, details, zipcode, delivery_method, delivery_time):
+        self.username = username
+        self.county = county
+        self.city = city
+        self.details = details
+        self.zipcode = zipcode
+        self.delivery_method = delivery_method
+        self.delivery_time = delivery_time
+
+    def __str__(self):
+        return f"username: {self.username}\ncounty: {self.county}\ncity: {self.city}\ndetails: {self.details}\nzipcode: {self.zipcode}\ndelivery_method: {self.delivery_method}\ndelivery_time: {self.delivery_time}"
+
+class Logistic:
+    def __init__(self, z_capacity=3, a_capacity=3):
+        self.z_capacity = z_capacity
+        self.a_capacity = a_capacity
+        self.users = []
+        self.users_address = []
+
+    def display_address_menu(self):
+        username = input("Please enter your username:\n")
+        self.users.append(username)
+
+        county_dict = {1: "Tehran", 2: "Esfahan", 3: "Tabriz"}
+        city_dict = {"Tehran": ["Tehran", "Damavand"], "Esfahan": ["Isfahan", "Kashan"], "Tabriz": ["Tabriz", "Sardroud"]}
+        #delivery_dict = {1: "Sobh", 2: "Zohr", 3: "Asr"}
+
+        print("Enter the county code:\n1 : Tehran \n2 : Esfahan \n3 : Tabriz")
+        county_code = int(input())
+        county = county_dict[county_code]
+
+        if county_code == 1:
+            print("Enter the city code:\n1 : Tehran \n2 : Damavand")
+        elif county_code == 2:
+            print("Enter the county code:\n1 : Isfahan \n2 : Kashan")
+        else:
+            print("Enter the county code:\n1 : Tabriz \n2 : Sardroud")
+        city_code = int(input())
+        city = city_dict[county][(city_code) - 1]
+
+
+        details = input("Enter the datails. it is optional:\n")
+        zipcode = input("Enter the zipcode. The zipCode should be 10 digits.\n")
+        while len(zipcode) != 10:
+            print("Error! ZipCode should be 10 digits.\n")
+            zipcode = input("ReEnter the zipcode:\n")
+
+        self.address = Address(username, county, city, details, zipcode, None, None)
+
+    def delivery_method(self):
+        if self.address.county == "Tehran":
+            self.address.delivery_method = "Peyk"
+        else:
+            self.address.delivery_method = "Post"
+
+    def delivery_time(self):
+        delivery_dict = {1: "Sobh", 2: "Zohr", 3: "Asr"}
+        if self.z_capacity and self.a_capacity > 0:
+            print("You can choose one of these options for your delivery:\n1: Sobh\n2: Zohr\n3: Asr")
+            d_time = int(input("Enter the number:\n"))
+            self.address.delivery_time = delivery_dict[d_time]
+            if d_time == 2:
+                self.z_capacity -= 1
+            elif d_time == 3:
+                self.a_capacity -= 1
+        elif self.z_capacity > 0:
+            print("You can choose one of these options for your delivery:\n1: Sobh\n2: Zohr")
+            d_time = int(input("Enter the number:\n"))
+            self.address.delivery_time = delivery_dict[d_time]
+            if d_time == 2:
+                self.z_capacity -= 1
+        elif self.a_capacity > 0:
+            print("You can choose one of these options for your delivery:\n1: Sobh\n3: Asr")
+            d_time = int(input("Enter the number:\n"))
+            self.address.delivery_time = delivery_dict[d_time]
+
+        else:
+            print("You can choose one of these options for your delivery:\n1: Sobh")
+            d_time = int(input("Enter the number:\n"))
+            self.address.delivery_time = delivery_dict[d_time]
+
+    def confirmation(self):
+        print("do you confirm this data? Enter 'Y' if yes. Else enter 'N'.")
+        print(self.address)
+        con = input()
+        if con == "Y":
+            print(self.address)
+            self.users_address.append(self.address)
+            return True
+        else:
+            return False
+
+#
+#
+#
+#
+#
+
+a = {'number': [], 'id': [], 'price': [], 'shipping_cost': [], 'tax': []}
+
+
+class Accounting:
+
+    def __init__(self, number, idd, price, shipping_cost, tax):
+        self.number = number
+        self.idd = idd
+        self.price = price
+        self.shipping_cost = shipping_cost
+        self.tax = tax
+        a['number'] = a['number'] + list(number)
+        a['id'] = a['id'] + list(idd)
+        a['price'] = a['price'] + list(price)
+        a['shipping_cost'] = a['shipping_cost'] + list(shipping_cost)
+        a['tax'] = a['tax'] + list(tax)
+
+    def export(self):
+        c = pd.DataFrame(a)
+        filepath = Path('folder/subfolder/out.xlsx')
+        filepath.parent.mkdir(parents=True, exist_ok=True)
+        c.to_excel(filepath)
+
 
 class Lego:
     def __init__(self, title: str, price: float, pieces: int, ageRate: str,
@@ -8,9 +138,13 @@ class Lego:
         self.pieces = pieces
         self.ageRate = ageRate
         self.item = item
-        self._stockCount = stockCount
+        self.stockCount = stockCount
         self.idCode = idCode
 
+
+#
+#
+#
 
 grand_piano_1 = Lego('Grand Piano', 399.99, 3662, 'A', 21323, 3, 101)
 grand_piano_2 = Lego('Grand Piano', 249.99, 1780, 'B', 10562, 4, 102)
@@ -32,9 +166,6 @@ house_3 = Lego('House', 44.99, 604, 'C', 1056, 16, 403)
 stuff = [grand_piano_1, grand_piano_2, grand_piano_3, house_1, house_2, house_3,
          eiffel_tower_1, eiffel_tower_2, eiffel_tower_3, car_1, car_2, car_3]
 
-print('Hello!')
-print('Welcome to our LEGO Shop!')
-
 Users = {}
 
 Admins = {'Ava': '1234', 'Nima': '1234', 'Sadra': '1234'}
@@ -53,7 +184,36 @@ def buying(lego, username):
     if x == 'shop':
         shop(username)
     elif x == 'next':
-        address = input("Alright, Enter an address ")
+        # Creating an instance of the Logistic class
+        logistic = Logistic()
+
+        while True:
+
+            # Displaying the address menu for the user to enter their details
+            logistic.display_address_menu()
+
+            # Selecting the delivery method based on the user's county
+            logistic.delivery_method()
+
+            # Selecting the delivery time based on available capacity
+            logistic.delivery_time()
+
+            # Confirming the entered details with the user
+            confirmed = logistic.confirmation()
+
+            # If the user confirms the entered details, print the address
+            if confirmed:
+                print("Address confirmed.")
+                break
+            else:
+                print("Address not confirmed. Please try again.")
+
+            Frequest = input("do you have any other request? Enter 'Y' if yes. Else enter 'N'.\n\n")
+            if Frequest == 'N':
+                # for i in logistic.users_address:
+                #   print(i,"\n**********")
+                exit(0)
+
     elif x == 'menu':
         mainMenu(username)
     else:
@@ -70,8 +230,9 @@ def showDetailes(x, age_range, username):
             buy = input("Type 'add' to add this Lego to your bag and type 'back' to back to other Legos. ")
             if buy == 'add':
                 buying(i, username)
+                tru = 1
             elif buy == 'back':
-                showAvailable(age_range)
+                showAvailable(age_range, username)
                 tru = 1
             break
 
@@ -85,18 +246,18 @@ def showAvailable(age_range, username):
     print("These products are available:")
     print("")
     for i in stuff:
-        if i._stockCount != 0 and i.ageRate == age_range:
+        if i.stockCount != 0 and i.ageRate == age_range:
             print(i.title, i.idCode)
             print(i.price, '$')
             print("")
-        if i._stockCount == 0 and i.ageRate == age_range:
+        if i.stockCount == 0 and i.ageRate == age_range:
             print(i.title, i.idCode)
             print('Unavailable')
             print("")
 
     x = input("Type the id code of each Lego to see more details or type 'back' to back to menu. ")
     if x == 'back':
-        mainMenu()
+        mainMenu(username)
     else:
         showDetailes(x, age_range, username)
 
@@ -117,6 +278,25 @@ def shop(username):
     else:
         print("Enter a valid command.")
         shop(username)
+
+
+def adminMenu(admin):
+    print("Type 'accounting' to export the accounting file.")
+    print("Type 'inventory' to do inventory management.")
+    print("Type log out to log out.")
+    x = input()
+
+    if x == 'accounting' or x == 'Accounting':
+        print()
+    elif x == 'inventory' or x == 'Inventory':
+        print()
+    elif x == 'logout' or x == 'Logout' or x == 'log out' or x == 'Log out':
+        print("You're logged out.")
+        login()
+
+    else:
+        print("Enter a valid command please. ")
+        adminMenu(admin)
 
 
 def mainMenu(username):
@@ -250,6 +430,5 @@ def login():
     else:
         print('Answer with yes/no.')
         login()
-
 
 login()
