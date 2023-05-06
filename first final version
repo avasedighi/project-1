@@ -309,9 +309,9 @@ def adminMenu(admin):
     x = input()
 
     if x == 'accounting' or x == 'Accounting':
-        print()
-    elif x == 'inventory' or x == 'Inventory':
         Accounting()
+    elif x == 'inventory' or x == 'Inventory':
+        print()
     elif x == 'logout' or x == 'Logout' or x == 'log out' or x == 'Log out':
         print("You're logged out.")
         login()
