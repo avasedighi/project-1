@@ -1,5 +1,5 @@
 class Address:
-    def __init__(self, username, county, city, details, zipcode, delivery_method, delivery_time):
+    def __init__(self, username, full_name, county, city, details, zipcode, phone_number, delivery_method, delivery_time):
         self.username = username
         self.county = county
         self.city = city
@@ -7,9 +7,11 @@ class Address:
         self.zipcode = zipcode
         self.delivery_method = delivery_method
         self.delivery_time = delivery_time
+        self.phone_number = phone_number
+        self.full_name = full_name
 
     def __str__(self):
-        return f"username: {self.username}\ncounty: {self.county}\ncity: {self.city}\ndetails: {self.details}\nzipcode: {self.zipcode}\ndelivery_method: {self.delivery_method}\ndelivery_time: {self.delivery_time}"
+        return f"username: {self.username}\nfull name: {self.full_name}\ncounty: {self.county}\ncity: {self.city}\ndetails: {self.details}\nzipcode: {self.zipcode}\ndelivery_method: {self.delivery_method}\ndelivery_time: {self.delivery_time}\nphone_number: {self.phone_number}"
 
 class Logistic:
     def __init__(self, z_capacity=3, a_capacity=3):
@@ -22,9 +24,12 @@ class Logistic:
         username = input("Please enter your username:\n")
         self.users.append(username)
 
+        fullname = input("Please enter your full name:\n")
+
+        phonen = input("Please enter your phone number:\n")
+
         county_dict = {1: "Tehran", 2: "Esfahan", 3: "Tabriz"}
         city_dict = {"Tehran": ["Tehran", "Damavand"], "Esfahan": ["Isfahan", "Kashan"], "Tabriz": ["Tabriz", "Sardroud"]}
-        #delivery_dict = {1: "Sobh", 2: "Zohr", 3: "Asr"}
 
         print("Enter the county code:\n1 : Tehran \n2 : Esfahan \n3 : Tabriz")
         county_code = int(input())
@@ -45,7 +50,7 @@ class Logistic:
             print("Error! ZipCode should be 10 digits.\n")
             zipcode = input("ReEnter the zipcode:\n")
 
-        self.address = Address(username, county, city, details, zipcode, None, None)
+        self.address = Address(username, fullname, county, city, details, zipcode, phonen, None, None)
 
     def delivery_method(self):
         if self.address.county == "Tehran":
@@ -109,12 +114,10 @@ while True:
 
     #If the user confirms the entered details, print the address
     if confirmed:
-        print("Address confirmed.")
+        print("\nAddress confirmed.\n")
     else:
-        print("Address not confirmed. Please try again.")
+        print("\nAddress not confirmed. Please try again.")
 
     Frequest = input("do you have any other request? Enter 'Y' if yes. Else enter 'N'.\n\n")
     if Frequest == 'N':
-        #for i in logistic.users_address:
-         #   print(i,"\n**********")
         exit(0)
