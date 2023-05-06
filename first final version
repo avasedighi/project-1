@@ -1,10 +1,10 @@
 
 import pandas as pd
 from pathlib import Path
+import random
 
 print('Hello!')
 print('Welcome to our LEGO Shop!')
-
 
 
 class Address:
@@ -22,6 +22,7 @@ class Address:
     def __str__(self):
         return f"username: {self.username}\nfull name: {self.full_name}\ncounty: {self.county}\ncity: {self.city}\ndetails: {self.details}\nzipcode: {self.zipcode}\ndelivery_method: {self.delivery_method}\ndelivery_time: {self.delivery_time}\nphone_number: {self.phone_number}"
 
+
 class Logistic:
     def __init__(self, z_capacity=3, a_capacity=3):
         self.z_capacity = z_capacity
@@ -33,11 +34,11 @@ class Logistic:
 
         username = input("Please enter your username:\n")
         self.users.append(username)
-        
+
         fullname = input("Please enter your full name")
-        
+
         phonen = input("Please enter your phone number:\n")
-        
+
         county_dict = {1: "Tehran", 2: "Esfahan", 3: "Tabriz"}
         city_dict = {"Tehran": ["Tehran", "Damavand"], "Esfahan": ["Isfahan", "Kashan"], "Tabriz": ["Tabriz", "Sardroud"]}
         #delivery_dict = {1: "Sobh", 2: "Zohr", 3: "Asr"}
@@ -54,7 +55,6 @@ class Logistic:
             print("Enter the county code:\n1 : Tabriz \n2 : Sardroud")
         city_code = int(input())
         city = city_dict[county][(city_code) - 1]
-
 
         details = input("Enter the datails. it is optional:\n")
         zipcode = input("Enter the zipcode. The zipCode should be 10 digits.\n")
@@ -107,11 +107,6 @@ class Logistic:
         else:
             return False
 
-#
-#
-#
-#
-#
 
 a = {'number': [], 'id': [], 'price': [], 'shipping_cost': [], 'tax': []}
 
@@ -149,10 +144,6 @@ class Lego:
         self.idCode = idCode
 
 
-#
-#
-#
-
 grand_piano_1 = Lego('Grand Piano', 399.99, 3662, 'A', 21323, 3, 101)
 grand_piano_2 = Lego('Grand Piano', 249.99, 1780, 'B', 10562, 4, 102)
 grand_piano_3 = Lego('Grand Piano', 99.99, 431, 'C', 1098, 0, 103)
@@ -180,18 +171,25 @@ Admins = {'Ava': '1234', 'Nima': '1234', 'Sadra': '1234'}
 shopping_bag = {}
 
 
-def checkout(lego, n, username):
-    print(f"{lego.price} * {n} = {lego.price * n} dollars.")
+
+def checkout(lego, n, username, a):
+    print(f"{lego.price} * {n} + 5 (delivery) = {lego.price * n + 5} dollars.")
     cardNumber = input("Enter your credit card number: ")
     if len(cardNumber) == 16:
         print("Checked out succesfully.")
         lego.stockCount = lego.stockCount - n
         shopping_bag[username] = []
+        order_number = random(16)
+        a['name'].append(n)
+        a['id'].append(order_number)
+        a['price'].append(lego.price * n + 5)
+        a['shipping_cost'].append(5)
+        a['tax'].append(0.09 * lego.price * n)
         mainMenu(username)
 
     else:
         print("EROR! try again for checking out.")
-        checkout()
+        checkout(lego, n, username)
 
 
 def howMany(lego, username):
@@ -313,7 +311,7 @@ def adminMenu(admin):
     if x == 'accounting' or x == 'Accounting':
         print()
     elif x == 'inventory' or x == 'Inventory':
-        print()
+        Accounting()
     elif x == 'logout' or x == 'Logout' or x == 'log out' or x == 'Log out':
         print("You're logged out.")
         login()
@@ -375,7 +373,6 @@ def TrueUserLogin(username, password):
         if Users[username] == password:
             TruePassword = 1
             print('Welcom ' + str(username) + '! You are logged in!')
-            loggedin_user = username
             mainMenu(username)
 
     if TrueUsername == 1 and TruePassword == 0:
@@ -396,6 +393,7 @@ def TrueAdminLogin(username, password):
         if Admins[username] == password:
             TruePassword = 1
             print('Welcom Sir! You are logged in.')
+            adminMenu(username)
 
     if TrueUsername == 1 and TruePassword == 0:
         return 10
@@ -454,5 +452,6 @@ def login():
     else:
         print('Answer with yes/no.')
         login()
+
 
 login()
