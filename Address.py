@@ -90,7 +90,7 @@ class Logistic:
         else:
             return False
 
-    # Creating an instance of the Logistic class
+# Creating an instance of the Logistic class
 logistic = Logistic()
 
 while True:
