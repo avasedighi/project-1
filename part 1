@@ -173,6 +173,13 @@ Admins = {'Ava': '1234', 'Nima': '1234', 'Sadra': '1234'}
 shopping_bag = {}
 
 
+def checkout():
+    cardNumber = input("Enter your credit card number: ")
+    if len(cardNumber) == 16:
+        print("Checked out succesfully.")
+    else:
+        print("EROR! try again for checking out.")
+        checkout()
 
 
 def buying(lego, username):
