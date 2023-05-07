@@ -1,0 +1,25 @@
+import pandas as pd
+from pathlib import Path
+
+a = {'number': [], 'id': [], 'price': [], 'shipping_cost': [], 'tax': []}
+
+class Accounting:
+
+    def __init__(self, number, idd, price, shipping_cost, tax):
+        self.number = number
+        self.idd = idd
+        self.price = price
+        self.shipping_cost = shipping_cost
+        self.tax = tax
+        a['number'] = a['number'] + list(number)
+        a['id'] = a['id'] + list(idd)
+        a['price'] = a['price'] + list(price)
+        a['shipping_cost'] = a['shipping_cost'] + list(shipping_cost)
+        a['tax'] = a['tax'] + list(tax)
+
+   def output(self):
+        c=pd.DataFrame(a)
+        filepath = Path('folder/subfolder/out.xlsx')
+        filepath.parent.mkdir(parents=True, exist_ok=True)
+        c.to_excel(filepath)
+ 
