@@ -38,9 +38,9 @@ class Logistic:
         if county_code == 1:
             print("Enter the city code:\n1 : Tehran \n2 : Damavand")
         elif county_code == 2:
-            print("Enter the county code:\n1 : Isfahan \n2 : Kashan")
+            print("Enter the city code:\n1 : Isfahan \n2 : Kashan")
         else:
-            print("Enter the county code:\n1 : Tabriz \n2 : Sardroud")
+            print("Enter the city code:\n1 : Tabriz \n2 : Sardroud")
         city_code = int(input())
         city = city_dict[county][(city_code) - 1]
 
@@ -95,29 +95,3 @@ class Logistic:
         else:
             return False
 
-# Creating an instance of the Logistic class
-logistic = Logistic()
-
-while True:
-
-    # Displaying the address menu for the user to enter their details
-    logistic.display_address_menu()
-
-    # Selecting the delivery method based on the user's county
-    logistic.delivery_method()
-
-    # Selecting the delivery time based on available capacity
-    logistic.delivery_time()
-
-    # Confirming the entered details with the user
-    confirmed = logistic.confirmation()
-
-    #If the user confirms the entered details, print the address
-    if confirmed:
-        print("\nAddress confirmed.\n")
-    else:
-        print("\nAddress not confirmed. Please try again.")
-
-    Frequest = input("do you have any other request? Enter 'Y' if yes. Else enter 'N'.\n\n")
-    if Frequest == 'N':
-        exit(0)
