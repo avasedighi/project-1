@@ -1,10 +1,10 @@
 class Inventory:
     def __init__(self):
-        self.stock = {}
+        self.stock = {} # انبار به صورت آیدی کالا و موجودی.
 
 
     def display_menu(self):
-        up = int(input("What do you want to do?\nEnter 0 for exit.\nEnter 1 for Update the inventory with csv file.\nEnter 2 for Update the inventory with normal input.\nEnter 3 to see inventory.\nEnter 4 to add items.\n"))
+        up = int(input("What do you want to do?\nEnter 0 to back to admin menu.\nEnter 1 for Update the inventory with csv file.\nEnter 2 for Update the inventory with normal input.\nEnter 3 to see inventory.\nEnter 4 to add items.\n"))
 
         if up == 0:
             return 0
@@ -21,62 +21,52 @@ class Inventory:
         elif up == 4:
             return 4
 
+    def update_stock(self, item_code, quantity): #متود آپدیت انبار به صورت ورودی
+        if item_code in self.stock:
+            self.stock[item_code] = quantity
+        else:
+            self.stock[item_code] = quantity
+
     def get_stock(self):
         return self.stock
 
-    def save_stock(self, filename):
+    def save_stock(self, filename):              #متود ذخیره آیتم ها داخل فایل csv یا txt
         with open(filename, 'w') as f:
             for item_code, quantity in self.stock.items():
                 f.write(f"{item_code},{quantity},1\n")
 
-    def load_stock(self, filename):
+    def load_stock(self, filename):              #متود لود کردن آیتم ها از روی فایلcsv
         with open(filename, 'r') as f:
             for line in f:
                 item_code, quantity = line.strip().split(',')
                 self.stock[item_code] = int(quantity)
 
-    def add_item(self, item_code, quantity):
+    def add_item(self, item_code, quantity):    #متود اضافه کردن آیتم به صورت دستی
         self.stock[item_code] = quantity
 
 inventory = Inventory()
 inventory.load_stock('موجودی اولیه.csv')
-while True:
-    display_menu = inventory.display_menu()
-    if display_menu == 0:
-        exit(0)
 
-    elif display_menu == 1:
-        r = input(("Enter the csv file address\n"))
-        inventory.load_stock(r)
+def display():
 
-    elif display_menu == 2:
-        contin = "Y"
-        while contin == "Y":
-            item = input("Please enter the item code.\n")
-            quantity = int(input("Please enter the new quantity.\n"))
-            inventory.update_stock(item ,quantity)
-            contin = input("do you want update the other items?\nEnter Y for yes. N for n.")
+    while True:
+        display_menu = inventory.display_menu()
+        if display_menu == 0:
+            return 0
 
-    elif display_menu == 3:
-        m = input("If you want the inventory file as CSV file enter C. Else enter T.\n")
-        if m == "C":
-            inventory.save_stock('inventory.csv')
-            print("you can check the 'inventory.csv' file.")
+        elif display_menu == 1:
+            return 1
 
-        elif m == "T":
-            inventory.save_stock('inventory.txt')
-            print("you can check the 'inventory.txt'")
+        elif display_menu == 2:
+            return 2
 
-    elif display_menu == 4:
-        t = input("Enter the item title:\n")
-        i = input("Enter the item ID:\n")
-        q = int(input("Enter the quantity:\n"))
-        p = float(input("Enter the price:\n"))
-        pic = int(input("Enter the lego pieces:\n"))
-        age = input("Enter the ege rate:\n")
-        it = int(input("Enter the item:\n"))
+        elif display_menu == 3:
+            return 3
 
-        inventory.add_item(i, q)
+        elif display_menu == 4:
+            return 4
 
-    inventory.save_stock('inventory.csv')
-    inventory.save_stock('inventory.txt')
+
+
+        inventory.save_stock('inventory.csv')
+        inventory.save_stock('inventory.txt')
